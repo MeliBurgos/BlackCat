@@ -18,6 +18,7 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(postMeRequest());
   }, []);
   return (
@@ -33,7 +34,6 @@ function App() {
           element={
             <>
               <Table />
-              <CartGrid />
             </>
           }
         />

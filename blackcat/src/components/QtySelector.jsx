@@ -23,7 +23,11 @@ const QtySelector = ({ product }) => {
   const handleSubmit = () => {
     dispatch(cartContAdd(value));
     dispatch(
-      getSelectedProductsRequest({ productId: product.id, amount: value })
+      getSelectedProductsRequest({
+        productId: product.id,
+        amount: value,
+        productPrice: product.price,
+      })
     );
   };
 

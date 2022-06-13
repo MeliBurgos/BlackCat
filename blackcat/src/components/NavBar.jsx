@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { CgProfile } from "react-icons/cg";
 
@@ -11,8 +11,9 @@ import { postLogoutRequest, postMeRequest } from "../redux/login";
 function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const cont = useSelector((state) => state.cont);
+  const [contador, setContador] = useState();
+  const cart = JSON.parse(localStorage.getItem("cart")) || undefined;
+  const cont = cart ? cart.reduce((acum, obj) => acum + obj.amount, 0) : 0;
 
   const user = localStorage.getItem("user");
   const userJson = JSON.parse(localStorage.getItem("user"));
@@ -40,18 +41,6 @@ function NavBar() {
             />
           </p>
         </Link>
-
-        <p
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </p>
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">

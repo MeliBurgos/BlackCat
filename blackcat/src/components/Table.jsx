@@ -3,20 +3,26 @@ import { VscTrash } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
 
 import products from "../products";
-import { getTableRequest } from "../redux/table";
+import { getTableRequest, cleanTableRequest } from "../redux/table";
 
 function Table() {
   const dispatch = useDispatch();
-  const arr = useSelector((state) => state.selected);
+  let arrCart = useSelector((state) => state.selected);
   const tableProducts = useSelector((state) => state.table);
-  console.log("TABLE PRODUCTS", tableProducts);
-  console.log("SELECTED", arr);
+
+  if (localStorage.getItem("cart")) {
+    arrCart = JSON.parse(localStorage.getItem("cart"));
+  }
 
   useEffect(() => {
-    arr.map((item) => {
+    console.log("ARR CART", arrCart);
+    dispatch(cleanTableRequest());
+
+    arrCart.forEach((item) => {
       dispatch(getTableRequest(item.productId));
     });
   }, []);
+
   return (
     <>
       <div class="column py-2"></div>
@@ -38,26 +44,37 @@ function Table() {
               <th></th>
               <th></th>
               <th>TOTAL:</th>
-              <th>${products[1].precio * 5 * arr.length}</th>
+              <th>
+                $
+                {arrCart.reduce(
+                  (acum, obj) => acum + obj.productPrice * obj.amount,
+                  0
+                )}
+              </th>
             </tr>
           </tfoot>
-          {arr.map((item) => (
+          {tableProducts.map((item, index) => (
             <tbody>
               <tr>
                 <th>
                   <figure>
-                    <img width={50} src={products[1].img} alt="cake" />
+                    <img width={50} src={item.photo} alt="cake" />
                   </figure>
                 </th>
-                <th>{products[1].name}</th>
-                <th>{5}</th>
-                <th>${products[1].precio}</th>
+                <th>{item.name}</th>
+                <th>{arrCart[index].amount}</th>
+                <th>${item.price}</th>
                 <th>{<VscTrash class="is-clickable" />}</th>
               </tr>
             </tbody>
           ))}
         </table>
+        <button class="button">PAGAR</button>
       </div>
+      <div class="column py-6"></div>
+      <div class="column py-6"></div>
+      <div class="column py-6"></div>
+      <div class="column py-5"></div>
     </>
   );
 }
