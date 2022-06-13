@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { ReactReduxContext, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { CgProfile } from "react-icons/cg";
 
