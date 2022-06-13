@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 import products from "../products";
 import { getTableRequest, cleanTableRequest } from "../redux/table";
@@ -9,19 +10,30 @@ function Table() {
   const dispatch = useDispatch();
   let arrCart = useSelector((state) => state.selected);
   const tableProducts = useSelector((state) => state.table);
+  const navigate=useNavigate()
 
   if (localStorage.getItem("cart")) {
     arrCart = JSON.parse(localStorage.getItem("cart"));
   }
+  const user= JSON.parse(localStorage.getItem('user'))|| undefined
+
+  
+  const handleCheckout=()=>{
+    if(user){navigate('/checkout')}
+   else{navigate('/login')} 
+  }
 
   useEffect(() => {
-    console.log("ARR CART", arrCart);
     dispatch(cleanTableRequest());
 
     arrCart.forEach((item) => {
       dispatch(getTableRequest(item.productId));
     });
   }, []);
+
+
+
+
 
   return (
     <>
@@ -69,7 +81,7 @@ function Table() {
             </tbody>
           ))}
         </table>
-        <button class="button">PAGAR</button>
+        <button class="button" onClick={handleCheckout}>PAGAR</button>
       </div>
       <div class="column py-6"></div>
       <div class="column py-6"></div>
