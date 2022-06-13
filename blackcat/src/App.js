@@ -13,6 +13,7 @@ import Table from "./components/Table";
 import NewUser from "./components/NewUser";
 import Login from "./components/Login";
 import { postMeRequest } from "./redux/login";
+import Contact from "./components/Contact";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
         />
         <Route path="/singup" element={<NewUser />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </div>

@@ -80,7 +80,7 @@ function NavBar() {
                 </div>
               </div>
               <div class="column">
-                <Link to={"/contacto"}>
+                <Link to={"/contact"}>
                   <p class="navbar-item">Contacto</p>
                 </Link>
               </div>
