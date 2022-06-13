@@ -9,12 +9,11 @@ import { CgProfile } from "react-icons/cg";
 import { postLogoutRequest, postMeRequest } from "../redux/login";
 
 function NavBar() {
+  const update=useSelector(state=>state.cont) ;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [contador, setContador] = useState();
   const cart = JSON.parse(localStorage.getItem("cart")) || undefined;
   const cont = cart ? cart.reduce((acum, obj) => acum + obj.amount, 0) : 0;
-
   const user = localStorage.getItem("user");
   const userJson = JSON.parse(localStorage.getItem("user"));
 

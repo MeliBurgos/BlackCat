@@ -14,6 +14,7 @@ import NewUser from "./components/NewUser";
 import Login from "./components/Login";
 import { postMeRequest } from "./redux/login";
 import Contact from "./components/Contact";
+import Checkout from "./components/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
         <Route path="/singup" element={<NewUser />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       <Footer />
     </div>
