@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
-import products from "../products";
 import { getTableRequest, cleanTableRequest } from "../redux/table";
 
 function Table() {
   const dispatch = useDispatch();
-  let arrCart = useSelector((state) => state.selected);
   const tableProducts = useSelector((state) => state.table);
   const navigate=useNavigate()
+  const [modi,setModi]=useState(false)
+  const arrCart= localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")):[]
 
-  if (localStorage.getItem("cart")) {
-    arrCart = JSON.parse(localStorage.getItem("cart"));
-  }
+  console.log("SOY ARRCART OTRA VEZ",arrCart)
+ 
   const user= JSON.parse(localStorage.getItem('user'))|| undefined
 
   
@@ -23,15 +22,23 @@ function Table() {
    else{navigate('/login')} 
   }
 
+  // const handleRemove=(item)=>{
+  //     arrCart.forEach((element,i)=>{
+  //     if(element.productId===item.id){
+  //         arrCart.splice(i,1);
+  //         localStorage.setItem('cart', JSON.stringify(arrCart))}
+  //         console.log(arrCart)
+               
+  //     })
+  // }
+
   useEffect(() => {
     dispatch(cleanTableRequest());
-
     arrCart.forEach((item) => {
       dispatch(getTableRequest(item.productId));
+      console.log('LOG DE EFFECT', arrCart)
     });
   }, []);
-
-
 
 
 
@@ -56,13 +63,13 @@ function Table() {
               <th></th>
               <th></th>
               <th>TOTAL:</th>
-              <th>
+              {/* <th>
                 $
                 {arrCart.reduce(
                   (acum, obj) => acum + obj.productPrice * obj.amount,
                   0
                 )}
-              </th>
+              </th> */}
             </tr>
           </tfoot>
           {tableProducts.map((item, index) => (
@@ -74,9 +81,9 @@ function Table() {
                   </figure>
                 </th>
                 <th>{item.name}</th>
-                <th>{arrCart[index].amount}</th>
+                {/* <th>{arrCart[index].amount}</th> */}
                 <th>${item.price}</th>
-                <th>{<VscTrash class="is-clickable" />}</th>
+                <th>{<VscTrash class="is-clickable"/* onClick={()=>handleRemove(item)}*/ />}</th>
               </tr>
             </tbody>
           ))}
