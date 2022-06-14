@@ -11,6 +11,7 @@ import DetailsCard from "./components/DetailsCard";
 import Table from "./components/Table";
 import NewUser from "./components/NewUser";
 import Login from "./components/Login";
+import { getSelectedProductsRequest } from "./redux/cart";
 import { postMeRequest } from "./redux/login";
 import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
@@ -18,10 +19,25 @@ import Checkout from "./components/Checkout";
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.login);
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(postMeRequest());
+    cart.forEach((element) => {
+      dispatch(
+        getSelectedProductsRequest({
+          productId: element.productId,
+          amount: element.amount,
+          productPrice: element.productPrice,
+        })
+      );
+    });
   }, []);
+
+  let arrCart = useSelector((state) => state.selected);
+  console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
   return (
     <div>
       <NavBar />

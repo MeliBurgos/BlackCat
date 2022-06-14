@@ -1,9 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import QtySelector from "./QtySelector";
 
 function Card({ product }) {
+
+  // let arrCart = useSelector((state) => state.selected);
+  // console.log("SOY CART",arrCart)
   return (
     <div class="card">
       <div class="card-image">
@@ -23,7 +27,7 @@ function Card({ product }) {
         <div class="content is-10 has-text-centered is-italic">
           {product.description}
         </div>
-        <p class="has-text-centered">{product.price}</p>
+        <p class="has-text-centered">${product.price}</p>
       </div>
       {product.stock === 0 ? (
         <div class="card-footer p-2">

@@ -2,22 +2,15 @@ import React, { useEffect } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import products from "../products";
 import { getTableRequest, cleanTableRequest } from "../redux/table";
-import { getSelectedProductsRequest } from "../redux/cart";
+import { deleteSelectedProductsRequest } from "../redux/cart";
 
 function Table() {
   const dispatch = useDispatch();
   let arrCart = useSelector((state) => state.selected);
   const tableProducts = useSelector((state) => state.table);
   const navigate = useNavigate();
-
-  if (localStorage.getItem("cart")) {
-    arrCart = JSON.parse(localStorage.getItem("cart"));
-  }
   const user = JSON.parse(localStorage.getItem("user")) || undefined;
-
   const handleCheckout = () => {
     if (user) {
       navigate("/checkout");
@@ -27,24 +20,15 @@ function Table() {
   };
 
   const handleRemove = (item) => {
-    console.log("AAAAAAAAA", arrCart);
-    console.log("BBBBBBBB", item.id);
-    arrCart.forEach((element, i) => {
-      if (element.productId === item.id) {
-        arrCart.splice(i, 1);
-      }
-      localStorage.setItem("cart", JSON.stringify(arrCart));
-    });
-    window.location.reload();
+    dispatch(deleteSelectedProductsRequest(item));
   };
 
   useEffect(() => {
     dispatch(cleanTableRequest());
-
     arrCart.forEach((item) => {
       dispatch(getTableRequest(item.productId));
     });
-  }, []);
+  }, [arrCart]);
 
   return (
     <>
@@ -86,7 +70,10 @@ function Table() {
                 </th>
                 <th>{item.name}</th>
                 <th>
-                  <p class="has-text-centered">{arrCart[index].amount}</p>
+                  <p class="has-text-centered">
+                    {arrCart.length === tableProducts.length &&
+                      arrCart[index].amount}
+                  </p>
                 </th>
                 <th>${item.price}</th>
                 <th>
