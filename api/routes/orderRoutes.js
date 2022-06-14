@@ -1,6 +1,7 @@
 const express = require("express")
 const orderRouter = express.Router()
 
+const transporter = require('../config/mailer')
 const models = require('../models')
 
 //EN PROCESO, NINGUNA RUTA TERMINADA
@@ -22,6 +23,14 @@ orderRouter.post("/buy", (req, res) => {
           productId: item.productId
         }
         )
+          .then(() => {
+            transporter.sendMail({
+              from: '"Blackcat" <blackcatpasteleria@gmail.com>', // sender address
+              to: 'benjabecerrab@gmail.com', // list of receivers
+              subject: "Confirmacion de pedido", // Subject line
+              html: "<h1>Pedido realizado.</h1> <p> Su pedido sera confirmado luego de querealice el pago.</p>"
+            })
+          })
           .catch(err => console.log(err))
       })
     )
@@ -44,6 +53,8 @@ orderRouter.delete("/:id", (req, res) => {
     .then((data) => res.status(204).send("DELETED"))
     .catch((err) => console.log(err));
 });
+
+
 
 
 //////////////////////

@@ -4,6 +4,7 @@ const userRouter = express.Router()
 const User = require("../models/User")
 const Order = require("../models/Order")
 const passport = require("passport")
+const s = require('sequelize')
 
 
 //Registro de un Usuario
@@ -28,7 +29,6 @@ userRouter.post("/logout", function (req, res, next) {
   })
 })
 
-
 //Actualiza los datos del User
 userRouter.put("/edit/:id", (req, res) => {
   const id = req.params.id
@@ -43,6 +43,13 @@ userRouter.put("/edit/:id", (req, res) => {
     .catch((err) => {
       res.status(400).send(err)
     })
+})
+
+//Devuelve todos los users menos quien pide
+ userRouter.get("/all/:id", (req, res) => {
+  User.findAll({ where:{ [s.Op.not]: {id: req.params.id}}, include: { model: Order } })
+    .then(data => res.send(data))
+    .catch(err => console.log(err))
 })
 
 //Devuelve un User x id
