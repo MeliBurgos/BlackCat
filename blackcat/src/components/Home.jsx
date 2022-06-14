@@ -1,6 +1,10 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 
 function Home() {
+
   return (
     <div class="columns p-6">
       <div class="column p-6">

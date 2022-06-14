@@ -1,47 +1,37 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getTableRequest, cleanTableRequest } from "../redux/table";
+import {deleteSelectedProductsRequest} from "../redux/cart"
+
+
 
 function Table() {
   const dispatch = useDispatch();
+  let arrCart = useSelector((state) => state.selected);
   const tableProducts = useSelector((state) => state.table);
   const navigate=useNavigate()
-  const [modi,setModi]=useState(false)
-  const arrCart= localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")):[]
-
-  console.log("SOY ARRCART OTRA VEZ",arrCart)
- 
   const user= JSON.parse(localStorage.getItem('user'))|| undefined
-
-  
   const handleCheckout=()=>{
     if(user){navigate('/checkout')}
    else{navigate('/login')} 
   }
 
-  // const handleRemove=(item)=>{
-  //     arrCart.forEach((element,i)=>{
-  //     if(element.productId===item.id){
-  //         arrCart.splice(i,1);
-  //         localStorage.setItem('cart', JSON.stringify(arrCart))}
-  //         console.log(arrCart)
-               
-  //     })
-  // }
-
+  console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP',arrCart)
+  const handleRemove=(item)=>{
+    console.log('SOY PRE',arrCart)
+     dispatch(deleteSelectedProductsRequest(item))
+  }
+ 
   useEffect(() => {
     dispatch(cleanTableRequest());
     arrCart.forEach((item) => {
       dispatch(getTableRequest(item.productId));
-      console.log('LOG DE EFFECT', arrCart)
     });
-  }, []);
+  }, [arrCart]);
 
-
-
+  
   return (
     <>
       <div class="column py-2"></div>
@@ -63,13 +53,13 @@ function Table() {
               <th></th>
               <th></th>
               <th>TOTAL:</th>
-              {/* <th>
+              <th>
                 $
                 {arrCart.reduce(
                   (acum, obj) => acum + obj.productPrice * obj.amount,
                   0
                 )}
-              </th> */}
+              </th>
             </tr>
           </tfoot>
           {tableProducts.map((item, index) => (
@@ -81,9 +71,9 @@ function Table() {
                   </figure>
                 </th>
                 <th>{item.name}</th>
-                {/* <th>{arrCart[index].amount}</th> */}
+               <th>{arrCart.length===tableProducts.length && arrCart[index].amount}</th>
                 <th>${item.price}</th>
-                <th>{<VscTrash class="is-clickable"/* onClick={()=>handleRemove(item)}*/ />}</th>
+                <th>{<VscTrash class="is-clickable" onClick={()=>handleRemove(item)} />}</th>
               </tr>
             </tbody>
           ))}
