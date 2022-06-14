@@ -23,7 +23,6 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(postMeRequest());
     cart.forEach((element) => {
       dispatch(
         getSelectedProductsRequest({
@@ -36,7 +35,6 @@ function App() {
   }, []);
 
   let arrCart = useSelector((state) => state.selected);
-  console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
   return (
     <div>
