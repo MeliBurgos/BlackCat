@@ -1,27 +1,42 @@
 import React, { useEffect } from "react";
 import { VscTrash } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import products from "../products";
 import { getTableRequest, cleanTableRequest } from "../redux/table";
+import { getSelectedProductsRequest } from "../redux/cart";
 
 function Table() {
   const dispatch = useDispatch();
   let arrCart = useSelector((state) => state.selected);
   const tableProducts = useSelector((state) => state.table);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   if (localStorage.getItem("cart")) {
     arrCart = JSON.parse(localStorage.getItem("cart"));
   }
-  const user= JSON.parse(localStorage.getItem('user'))|| undefined
+  const user = JSON.parse(localStorage.getItem("user")) || undefined;
 
-  
-  const handleCheckout=()=>{
-    if(user){navigate('/checkout')}
-   else{navigate('/login')} 
-  }
+  const handleCheckout = () => {
+    if (user) {
+      navigate("/checkout");
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const handleRemove = (item) => {
+    console.log("AAAAAAAAA", arrCart);
+    console.log("BBBBBBBB", item.id);
+    arrCart.forEach((element, i) => {
+      if (element.productId === item.id) {
+        arrCart.splice(i, 1);
+      }
+      localStorage.setItem("cart", JSON.stringify(arrCart));
+    });
+    window.location.reload();
+  };
 
   useEffect(() => {
     dispatch(cleanTableRequest());
@@ -30,10 +45,6 @@ function Table() {
       dispatch(getTableRequest(item.productId));
     });
   }, []);
-
-
-
-
 
   return (
     <>
@@ -74,14 +85,28 @@ function Table() {
                   </figure>
                 </th>
                 <th>{item.name}</th>
-                <th>{arrCart[index].amount}</th>
+                <th>
+                  <p class="has-text-centered">{arrCart[index].amount}</p>
+                </th>
                 <th>${item.price}</th>
-                <th>{<VscTrash class="is-clickable" />}</th>
+                <th>
+                  <p class="has-text-centered">
+                    {
+                      <VscTrash
+                        class="is-clickable"
+                        onClick={() => handleRemove(item)}
+                        size={20}
+                      />
+                    }
+                  </p>
+                </th>
               </tr>
             </tbody>
           ))}
         </table>
-        <button class="button" onClick={handleCheckout}>PAGAR</button>
+        <button class="button is-black" onClick={handleCheckout}>
+          Siguiente
+        </button>
       </div>
       <div class="column py-6"></div>
       <div class="column py-6"></div>

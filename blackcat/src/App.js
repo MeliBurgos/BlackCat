@@ -7,7 +7,6 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
 import Corporate from "./components/Corporate";
-import CartGrid from "./components/CartGrid";
 import DetailsCard from "./components/DetailsCard";
 import Table from "./components/Table";
 import NewUser from "./components/NewUser";
