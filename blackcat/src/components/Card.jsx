@@ -25,7 +25,7 @@ function Card({ product }) {
           </div>
         </div>
         <div class="content is-10 has-text-centered is-italic">
-          {product.description}
+          {product.ingredients}
         </div>
         <p class="has-text-centered">${product.price}</p>
       </div>

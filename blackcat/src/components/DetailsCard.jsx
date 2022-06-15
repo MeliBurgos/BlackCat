@@ -24,11 +24,16 @@ function DetailsCard() {
         <div class="box">
           <div class="column is-flex">
             <div class="ml-6">
-              <img src={product.photo} alt="torta" />
+              <img src={product.photo} alt={product.name}/>
             </div>
             <div class="ml-6">
               <ul class="title is-3 has-text-weight-light">{product.name}</ul>
               <ul class="title is-2">${product.price}</ul>
+               <ul class="title is-5">{product.ingredients}</ul>
+               <ul class="title is-5 has-text-weight-light">{product.description}</ul>
+                <ul class="title is-5 has-text-weight-light">Valoraciones: 
+                <span class="has-text-weight-medium">{product.rating}/5</span></ul>
+                <progress class="progress is-primary" value={product.rating} max="5">15%</progress>
               <p class="title is-6 has-text-weight-light is-italic is-underlined ">
                 <GrCreditCard />
                 VER MEDIOS DE PAGO
