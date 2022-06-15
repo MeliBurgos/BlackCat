@@ -3,6 +3,7 @@ import { logger } from "redux-logger";
 import selectedProductReducer from "./cart";
 import cartContReducer from "./cartCont";
 import getUsersReducer from "./getUsers";
+import adminReducer from "./giveAdmin";
 import loginReducer from "./login";
 import productDetailsReducer from "./productDetails";
 import productsReducer from "./products";
@@ -18,6 +19,7 @@ const store = configureStore({
     table: tableReducer,
     login: loginReducer,
     users: getUsersReducer,
+    admin: adminReducer,
   },
 });
 
