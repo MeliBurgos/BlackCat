@@ -41,6 +41,7 @@ function Checkout() {
           seekerName: seekerName.value,
           seekerSurname: seekerSurname.value,
           seekerPhone: seekerPhone.value,
+          userId: user.id,
         },
         cart,
       ],
