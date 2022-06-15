@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import QtySelector from "./QtySelector";
 
 function Card({ product }) {
-
   // let arrCart = useSelector((state) => state.selected);
   // console.log("SOY CART",arrCart)
   return (
