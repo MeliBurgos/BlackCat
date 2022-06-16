@@ -87,13 +87,7 @@ function NewProduct() {
                   type="text"
                   placeholder="descripción"
                 />
-                {/* <label className="label my-3">Ingredientes</label>
-            <input
-              onChange={ingredients.onChange}
-              className="input my-3"
-              type="text"
-              placeholder="ingredientes"
-            /> */}
+
                 <div class="field">
                   <label class="label">Ingredientes</label>
                   <div class="control">
@@ -126,21 +120,6 @@ function NewProduct() {
                   placeholder="URL de la foto "
                 />
 
-                {/* ESTO COMENTADO ES PARA EL BOTON DE SUBIR UN ARCHIVO DESDE ARCHIVOS DE TU EQUIPO
-             <label className="label my-3">Imagen principal</label>
-            <br />
-            <div class="file is-normal">
-              <label class="file-label">
-                <input onChange={photo.onChange} class="file-input" type="file" name="resume" />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">Adjuntar imagen aqui</span>
-                </span>
-              </label>
-            </div> */}
-
                 <button
                   class="button is-black is-pulled-right"
                   type="submit"
@@ -153,8 +132,9 @@ function NewProduct() {
           </div>
           <div class="column my-4"></div>
         </>
-      ) : 
-      <p onChange={ setTimeout(() => navigate("/"), 500)}></p> }
+      ) : (
+        <p onChange={setTimeout(() => navigate("/"), 500)}></p>
+      )}
     </>
   );
 }
