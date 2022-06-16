@@ -11,9 +11,7 @@ import QtySelector from "./QtySelector";
 import { getProductDetailsRequest } from "../redux/productDetails";
 
 function Card({ product }) {
-  // let arrCart = useSelector((state) => state.selected);
-  // console.log("SOY CART",arrCart)
-  const user = JSON.parse(localStorage.getItem("user")) || undefined;
+  const user = JSON.parse(localStorage.getItem("user")) || "";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const me = useSelector((state) => state.me);
