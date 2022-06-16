@@ -97,13 +97,7 @@ function UpdateProd() {
                 type="text"
                 placeholder={product.description}
               />
-              {/* <label className="label my-3">Ingredientes</label>
-            <input
-              onChange={ingredients.onChange}
-              className="input my-3"
-              type="text"
-              placeholder="ingredientes"
-            /> */}
+
               <div class="field">
                 <label class="label">Ingredientes</label>
                 <div class="control">
