@@ -2,9 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { logger } from "redux-logger";
 import selectedProductReducer from "./cart";
 import cartContReducer from "./cartCont";
+import deleteproductReducer from "./deletePruduct";
 import getUsersReducer from "./getUsers";
 import adminReducer from "./giveAdmin";
 import loginReducer from "./login";
+import meReducer from "./me";
 import productDetailsReducer from "./productDetails";
 import productsReducer from "./products";
 import tableReducer from "./table";
@@ -20,6 +22,8 @@ const store = configureStore({
     login: loginReducer,
     users: getUsersReducer,
     admin: adminReducer,
+    me: meReducer,
+    delete: deleteproductReducer,
   },
 });
 
