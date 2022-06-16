@@ -1,5 +1,12 @@
-const express = require("express");
-const userRouter = express.Router();
+const express = require("express")
+const userRouter = express.Router()
+
+const User = require("../models/User")
+const Order = require("../models/Order")
+const passport = require("passport")
+const s = require('sequelize')
+const transporter = require('../config/mailer')
+
 
 const User = require("../models/User");
 const Order = require("../models/Order");
@@ -93,19 +100,20 @@ userRouter.delete("/delete/:id", async (req, res) => {
 });
 
 //Contacto
-userRouter.post("/contacto", async (req, res) => {
-  console.log(req.body);
-  try {
-    await transporter.sendMail({
-      from: `${req.body.name} <blackcatpasteleria@gmail.com>`,
-      to: "blackcatpasteleria@gmail.com",
-      subject: "Formulario de contacto",
-      html: `<b>${req.body.text}</b> <p>Mail: ${req.body.email} Tel: ${req.body.phone}</p> `,
-    });
-    res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-  }
-});
+userRouter.post("/contacto", async (req,res) => {
+console.log(req.body)
+ try {
+  await transporter.sendMail({
+          from: `${req.body.name} <blackcatpasteleria@gmail.com>`,
+          to: "blackcatpasteleria@gmail.com",
+          subject: "Formulario de contacto",
+          html: `<b>${req.body.text}</b> <p>Mail: ${req.body.email} Tel: ${req.body.phone}</p> `
+        })
+      res.sendStatus(200)
+} catch (error) {
+  console.log(error)
+} 
+})
+
 
 module.exports = userRouter;
