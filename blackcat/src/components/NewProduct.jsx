@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 
 function NewProduct() {
   const navigate = useNavigate();
+  const [Notif, setNotif] = useState(false);
 
   const name = useInput();
   const price = useInput();
@@ -14,7 +15,6 @@ function NewProduct() {
   const review = useInput();
   const categories = useInput();
   const photo = useInput();
-  console.log("foto", photo.value)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +29,7 @@ function NewProduct() {
       photo: photo.value,
     });
     setTimeout(() => navigate("/pedidos"), 500);
+    window.scrollTo({ behavior: "smooth", top: 0, left: 0 });
   };
 
   return (
@@ -39,29 +40,38 @@ function NewProduct() {
           <h3 class="title has-text-centered">
             Ingrese los datos de el nuevo producto{" "}
           </h3>
+          {Notif ? (
+            <div class="notification is-success">
+              <button class="delete" onClick={() => setNotif(false)}></button>
+              El producto se editó <strong>correctamente</strong>.
+            </div>
+          ) : (
+            ""
+          )}
           <form onSubmit={handleSubmit}>
-            <div >
-            <label className="label my-3">Nombre</label>
-            <input
-              onChange={name.onChange}
-              className="input my-3"
-              type="text"
-              placeholder="Ingrese su nombre"
-            />
-            <label className="label my-3">Precio</label>
-            <input
-              onChange={price.onChange}
-              className="input my-3"
-              type="text"
-              placeholder="el precio aqui"
-            />
-            <label className="label my-3">Stock</label>
-            <input
-              onChange={stock.onChange}
-              className="input my-3"
-              type="text"
-              placeholder="stock"
-            /></div>
+            <div>
+              <label className="label my-3">Nombre</label>
+              <input
+                onChange={name.onChange}
+                className="input my-3"
+                type="text"
+                placeholder="Ingrese su nombre"
+              />
+              <label className="label my-3">Precio</label>
+              <input
+                onChange={price.onChange}
+                className="input my-3"
+                type="text"
+                placeholder="el precio aqui"
+              />
+              <label className="label my-3">Stock</label>
+              <input
+                onChange={stock.onChange}
+                className="input my-3"
+                type="text"
+                placeholder="stock"
+              />
+            </div>
             <label className="label my-3">Description</label>
             <input
               onChange={description.onChange}
@@ -76,7 +86,7 @@ function NewProduct() {
               type="text"
               placeholder="ingredientes"
             /> */}
-             <div class="field">
+            <div class="field">
               <label class="label">Ingredientes</label>
               <div class="control">
                 <textarea
@@ -107,9 +117,8 @@ function NewProduct() {
               type="text"
               placeholder="URL de la foto "
             />
-            
-            
-           {/* ESTO COMENTADO ES PARA EL BOTON DE SUBIR UN ARCHIVO DESDE ARCHIVOS DE TU EQUIPO
+
+            {/* ESTO COMENTADO ES PARA EL BOTON DE SUBIR UN ARCHIVO DESDE ARCHIVOS DE TU EQUIPO
              <label className="label my-3">Imagen principal</label>
             <br />
             <div class="file is-normal">
@@ -124,7 +133,11 @@ function NewProduct() {
               </label>
             </div> */}
 
-            <button class="button is-black is-pulled-right" type="submit">
+            <button
+              class="button is-black is-pulled-right"
+              type="submit"
+              onClick={() => setNotif(true)}
+            >
               Listo!
             </button>
           </form>

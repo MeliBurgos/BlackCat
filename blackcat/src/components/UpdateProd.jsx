@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useInput from "../hooks/useInputs";
@@ -7,6 +8,8 @@ import { updateProductRequest } from "../redux/updateProd";
 function UpdateProd() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.details);
+
+  const [Notif, setNotif] = useState(false);
 
   const name = useInput();
   const price = useInput();
@@ -42,6 +45,7 @@ function UpdateProd() {
         product.id,
       ])
     );
+    window.scrollTo({ behavior: "smooth", top: 0, left: 0 });
   };
 
   return (
@@ -53,6 +57,15 @@ function UpdateProd() {
             <h3 class="title has-text-centered">
               Modifique los datos del producto{" "}
             </h3>
+            {Notif ? (
+              <div class="notification is-success">
+                <button class="delete" onClick={() => setNotif(false)}></button>
+                El producto se editó <strong>correctamente</strong>.
+              </div>
+            ) : (
+              ""
+            )}
+
             <form onSubmit={handleSubmit}>
               <div>
                 <label className="label my-3">Nombre</label>
@@ -116,7 +129,11 @@ function UpdateProd() {
                 placeholder={product.photo}
               />
 
-              <button class="button is-black is-pulled-right" type="submit">
+              <button
+                class="button is-black is-pulled-right"
+                type="submit"
+                onClick={() => setNotif(true)}
+              >
                 Listo!
               </button>
             </form>

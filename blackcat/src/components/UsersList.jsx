@@ -103,7 +103,7 @@ function UsersList() {
                     </tr>
                   </tbody>
                 ))
-              : "NO HAY USERS"}
+              : "NO HAY OTROS USUARIOS REGISTRADOS"}
           </table>
         </div>
       </div>

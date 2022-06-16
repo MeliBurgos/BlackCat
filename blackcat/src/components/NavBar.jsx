@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
