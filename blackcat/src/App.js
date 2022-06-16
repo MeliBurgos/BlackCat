@@ -17,6 +17,10 @@ import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
 import UsersList from "./components/UsersList";
 import PostBuy from "./components/PostBuy";
+import UpdateProd from "./components/UpdateProd";
+import User from "./components/User";
+import NewProduct from "./components/NewProduct"
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +64,10 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/users_list" element={<UsersList />} />
         <Route path="/post_buy" element={<PostBuy />} />
+        <Route path="/update_prod" element={<UpdateProd />} />
+        <Route path="/add_prod" element={<NewProduct />} />
+        <Route path="/myuser" element={<User />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
