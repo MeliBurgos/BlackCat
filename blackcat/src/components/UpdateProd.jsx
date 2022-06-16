@@ -2,12 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useNavigate } from "react-router";
 import useInput from "../hooks/useInputs";
 import { updateProductRequest } from "../redux/updateProd";
 
 function UpdateProd() {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.details);
+  const user = JSON.parse(localStorage.getItem("user")) || [];
+  const navigate = useNavigate()
 
   const [Notif, setNotif] = useState(false);
 
@@ -49,8 +52,7 @@ function UpdateProd() {
   };
 
   return (
-    <>
-      <>
+    <>{user.admin? <>
         <div class="column my-4"></div>
         <div class="column is-4 is-offset-4">
           <div className="layout m-5" color="color2">
@@ -134,7 +136,9 @@ function UpdateProd() {
           </div>
         </div>
         <div class="column my-4"></div>
-      </>
+      </> 
+      :
+       <p onChange={ setTimeout(() => navigate("/"), 500)}></p>}
     </>
   );
 }
