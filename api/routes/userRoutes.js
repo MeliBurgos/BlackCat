@@ -7,13 +7,6 @@ const passport = require("passport")
 const s = require('sequelize')
 const transporter = require('../config/mailer')
 
-
-const User = require("../models/User");
-const Order = require("../models/Order");
-const transporter = require("../config/mailer");
-const passport = require("passport");
-const s = require("sequelize");
-
 //Registro de un Usuario
 userRouter.post("/register", async (req, res) => {
   try {
