@@ -1,9 +1,14 @@
 import React from "react";
-import { BiPhoneCall } from "react-icons/bi";
+import { Link } from "react-router-dom";
+
+//Iconos
+import { BiPhoneCall, BiCreditCardAlt } from "react-icons/bi";
 import { SiMaildotru } from "react-icons/si";
+import { BsCreditCard2Front,  } from "react-icons/bs";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { BsFacebook } from "react-icons/bs";
-import { FaInstagramSquare } from "react-icons/fa";
+import {RiSecurePaymentLine, RiFacebookBoxFill} from "react-icons/ri"
+import {MdOutlinePayments} from "react-icons/md"
+import {AiFillTwitterCircle, AiFillInstagram} from "react-icons/ai"
 
 function Footer() {
   return (
@@ -11,35 +16,48 @@ function Footer() {
       <div class="columns is-multiline">
         <div class="column">
           <strong>NAVEGACIÓN</strong>
+
+          <Link to={"/"} style={{ color: '#291429' }}>
           <li>Inicio</li>
+          </Link>
+
+           <Link to={"/pedidos"} style={{ color: '#291429' }}>
           <li>Productos</li>
+          </Link>
+
+           <Link to={"/empresariales"} style={{ color: '#291429' }}>
           <li>Empresariales</li>
+          </Link>
+
+           <Link to={"/contact"} style={{ color: '#291429' }}>
           <li>Contacto</li>
+          </Link>
+
+           <Link to={"/"} style={{ color: '#291429' }}>
           <li>Preguntas frecuentes</li>
+          </Link>
+
         </div>
         <div class="column">
           <strong>MEDIOS DE PAGO</strong>
           <ul>
-            <img alt="visa"></img>
+            <p><BsCreditCard2Front/> Visa</p>
           </ul>
           <ul>
-            <img alt="mastercard"></img>
+            <p> <BiCreditCardAlt/> Mstercard</p>
           </ul>
           <ul>
-            <img alt="mercado pago"></img>
+            <p> <RiSecurePaymentLine/> Mercado Pago</p>
           </ul>
           <ul>
-            <img alt="pago fácil"></img>
-          </ul>
-          <ul>
-            <img alt="banelco"></img>
+            <p> <MdOutlinePayments/> Pago Fácil</p>
           </ul>
         </div>
         <div class="column">
           <strong>CONTACTANOS</strong>
-          <li>{<BiPhoneCall />}1137637336</li>
-          <li>{<SiMaildotru />}blackcat@gmail.com</li>
-          <li>{<FaMapMarkerAlt />}Avenida Siempreviva 742</li>
+          <li> <BiPhoneCall /> 1137637336</li>
+          <li> <SiMaildotru /> blackcatpasteleria@gmail</li>
+          <li> <FaMapMarkerAlt /> Avenida Siempreviva 742</li>
         </div>
         <div class="column">
           <strong>REDES SOCIALES</strong>
@@ -49,14 +67,21 @@ function Footer() {
               target="_blank"
               rel="noreferrer"
             >
-              <BsFacebook size={30} />
+              <RiFacebookBoxFill size={30} />
             </a>
             <a
               href="https://www.instagram.com/leomessi/"
               target="_blank"
               rel="noreferrer"
             >
-              <FaInstagramSquare size={30} />
+              <AiFillInstagram size={30} />
+            </a>
+            <a
+              href="https://twitter.com/ricarfort"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <AiFillTwitterCircle size={30} />
             </a>
           </div>
         </div>

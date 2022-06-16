@@ -15,6 +15,8 @@ import { getSelectedProductsRequest } from "./redux/cart";
 import { postMeRequest } from "./redux/login";
 import Contact from "./components/Contact";
 import Checkout from "./components/Checkout";
+import UsersList from "./components/UsersList";
+import PostBuy from "./components/PostBuy";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +58,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/users_list" element={<UsersList />} />
+        <Route path="/post_buy" element={<PostBuy />} />
       </Routes>
       <Footer />
     </div>
