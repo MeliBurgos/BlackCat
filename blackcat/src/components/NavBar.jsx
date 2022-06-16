@@ -84,7 +84,10 @@ function NavBar() {
             <div class="buttons">
               {user ? (
                 <>
-                  <div class="column is-flex">
+                  <div
+                    class="column is-flex is-clickable"
+                    onClick={() => navigate("/myuser")}
+                  >
                     <CgProfile size={30} />
                     <p class="subtitle">Hola {userJson.name}!</p>
                   </div>
